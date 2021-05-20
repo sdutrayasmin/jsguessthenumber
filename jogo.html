@@ -17,39 +17,42 @@
 </div>
 
 <div class="container">
-
-    <div class="mb-3">
-        <label for="aposta" class="form-label">Escolha um numero de 1 a 100.</label>
-        <input type="number" class="form-control" id="aposta">
-        <div class="mb-3">
-            <button type="button" class="btn btn-primary" onclick="exibeNumero()">Adivinhar</button>
-        </div>
-        <div id="mensagem" class="alert alert-primary invisible alert-dismissible fade show" role="alert">
-            O numero digitado foi <span id="apostaDigitada"></span>
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-        </div>
+    <div class="form">
+        <label for="aposta" class="form-label">Escolha um numero de 1 a 100 </label>
+        <input type = "text" id = "aposta" class = "aposta">
+        <input type = "submit" value = "Advinhar" 
+               class = "guessSubmit" id = "valoraposta">
     </div>
 </div>
+
+
 <script>
 
-function exibeNumero() {
-    var aposta = document.getElementById('aposta').value;
-    document.getElementById('apostaDigitada').innerText = aposta;
-    document.getElementById('mensagem').classList.remove("invisible");
-    document.getElementById('mensagem').classList.add("visible");
-}
 var numeroAleatorio = Math.floor(Math.random() * 100 +1) ;
+var numeroTentativas= 1;
+var numeroMin = 1;
+var numeroMax = 100;
 
 console.log(numeroAleatorio);
+
+document.getElementById("valoraposta").onclick = function(){
+var aposta = document.getElementById("aposta").value;
+
+if(aposta == numeroAleatorio)
+{    
+   alert(`Parabens voce descobriu o numero em ${numeroTentativas} tentativas!`);
 }
-
-function checarNumero() {
- if(aposta == numeroAleatorio){
-     alert('Você acertou')
- } else alert('Você errou')
+else if(aposta > numeroAleatorio) {
+    numeroMax = aposta    
+    numeroTentativas++;
+   alert(`Tente novamente um numero entre ${numeroMin} e  ${numeroMax} `);
 }
-
-
+else{
+    numeroMin = aposta
+    numeroTentativas++;
+   alert(`Tente novamente um numero entre ${numeroMin} e  ${numeroMax} `)
+}
+}
 
 
 </script>
