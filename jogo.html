@@ -1,62 +1,115 @@
 <!doctype html>
 <html lang="en">
 <head>
-    <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
 
-    <title>Hello, world!</title>
+    <title>Jogo da Adivinhação</title>
 </head>
-<body>
 
-<div class="container">
-    <h1>Jogo da Adivinhacao</h1>
-</div>
+    <style>
+        html, body {
+            height: 100%;
+        }
+        body {
+            display: -ms-flexbox;
+            display: -webkit-box;
+            display: flex;
+            -ms-flex-align: center;
+            -ms-flex-pack: center;
+            -webkit-box-align: center;
+            align-items: center;
+            -webkit-box-pack: center;
+            justify-content: center;
+            padding-top: 40px;
+            padding-bottom: 40px;
+            background-image:linear-gradient(#fed9b7 , #f4a261);
+        }
+        .justify-center {
+            height: auto;
+            width: 100%;
+            padding: 15px;
+            margin: 0 auto;
+        }
+    </style>
 
-<div class="container">
-    <div class="form">
-        <label for="aposta" class="form-label">Escolha um numero de 1 a 100 </label>
-        <input type = "text" id = "aposta" class = "aposta">
-        <input type = "submit" value = "Advinhar" 
-               class = "guessSubmit" id = "valoraposta">
-    </div>
-</div>
+    <body class="text-center">
+
+        <div class="justify-center">
+            <h1>Jogo da Adivinhacao</h1>
+            <label for="aposta" class="form-label" id="valorNumero"></label><br>
+            <input type = "text" id = "aposta" class = "form  aposta">
+            <input type = "submit" value = "Advinhar" class="btn btn-dark btn-sm" id = "valoraposta">
+            <p id = 'resultado'></p>
+        </div>
+
+            <div class="modal" id="popup">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Parabens</h5>
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <p id='mensagem' class='mensagem'></p>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        <script>
+            var numeroAleatorio = Math.floor(Math.random() * 100 +1) ;
+            var numeroTentativas= 1;
+            var numeroMin = 1;
+            var numeroMax = 100;
 
 
-<script>
+            console.log(numeroAleatorio);
+        </script>
+        <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 
-var numeroAleatorio = Math.floor(Math.random() * 100 +1) ;
-var numeroTentativas= 1;
-var numeroMin = 1;
-var numeroMax = 100;
-
-console.log(numeroAleatorio);
-
-document.getElementById("valoraposta").onclick = function(){
-var aposta = document.getElementById("aposta").value;
-
-if(aposta == numeroAleatorio)
-{    
-   alert(`Parabens voce descobriu o numero em ${numeroTentativas} tentativas!`);
-}
-else if(aposta > numeroAleatorio) {
-    numeroMax = aposta    
-    numeroTentativas++;
-   alert(`Tente novamente um numero entre ${numeroMin} e  ${numeroMax} `);
-}
-else{
-    numeroMin = aposta
-    numeroTentativas++;
-   alert(`Tente novamente um numero entre ${numeroMin} e  ${numeroMax} `)
-}
-}
+        <script>
+            document.getElementById("valorNumero").innerHTML ='Digite um numero entre ' + numeroMin + ' e ' + numeroMax;
+        document.getElementById("valoraposta").onclick = function(){
+            var aposta = document.getElementById("aposta").value;
 
 
-</script>
+            if(aposta == numeroAleatorio)
+            {
+                $('#popup').modal('show');{
+                    $('#mensagem').text('Voce descobriu o numero em ' + numeroTentativas+ ' tentativas!');
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
-</body>
+            }
+                $("#popup").click(function(){
+                    $("#popup").modal("hide");
+                });
+
+
+            }
+            else if(aposta > numeroAleatorio)
+            {
+                numeroMax = aposta
+                document.getElementById("valorNumero").innerHTML ='Digite um numero entre ' + numeroMin + ' e ' + numeroMax;
+
+
+                numeroTentativas++;
+            }
+            else
+            {
+                numeroMin = aposta
+                numeroTentativas++;
+                document.getElementById("valorNumero").innerHTML ='Digite um numero entre ' + numeroMin + ' e ' + numeroMax;
+            }
+
+        }
+
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
+    </body>
 </html>
