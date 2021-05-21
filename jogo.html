@@ -25,37 +25,34 @@
     </div>
 </div>
 
-
 <script>
-
-var numeroAleatorio = Math.floor(Math.random() * 100 +1) ;
-var numeroTentativas= 1;
-var numeroMin = 1;
-var numeroMax = 100;
-
-console.log(numeroAleatorio);
-
-document.getElementById("valoraposta").onclick = function(){
-var aposta = document.getElementById("aposta").value;
-
-if(aposta == numeroAleatorio)
-{    
-   alert(`Parabens voce descobriu o numero em ${numeroTentativas} tentativas!`);
-}
-else if(aposta > numeroAleatorio) {
-    numeroMax = aposta    
-    numeroTentativas++;
-   alert(`Tente novamente um numero entre ${numeroMin} e  ${numeroMax} `);
-}
-else{
-    numeroMin = aposta
-    numeroTentativas++;
-   alert(`Tente novamente um numero entre ${numeroMin} e  ${numeroMax} `)
-}
-}
+        document.getElementById("valorNumero").innerHTML ='Digite um numero entre ' + numeroMin + ' e ' + numeroMax;
+        document.getElementById("valoraposta").onclick = function(){
+            var aposta = document.getElementById("aposta").value;
 
 
-</script>
+            if(aposta == numeroAleatorio)
+            {
+                alert('Parabens voce descobriu o numero em ' + numeroTentativas+ ' tentativas!');
+            }
+            else if(aposta > numeroAleatorio)
+            {
+                numeroMax = aposta
+                document.getElementById("valorNumero").innerHTML ='Digite um numero entre ' + numeroMin + ' e ' + numeroMax;
+
+
+                numeroTentativas++;
+            }
+            else
+            {
+                numeroMin = aposta
+                numeroTentativas++;
+                document.getElementById("valorNumero").innerHTML ='Digite um numero entre ' + numeroMin + ' e ' + numeroMax;
+            }
+
+        }
+
+    </script>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
 </body>
